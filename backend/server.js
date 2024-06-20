@@ -10,13 +10,19 @@ const app = express();
 config({ path: "./config/.env" });
 
 // Middleware setup
+// Middleware setup
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL_ONE, process.env.FRONTEND_URL_TWO],
+    origin: [
+      process.env.FRONTEND_URL_ONE,
+      process.env.FRONTEND_URL_TWO,
+      "https://netflix-2-0-blue.vercel.app",
+    ],
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
 );
+
 
 app.use(cookieParser());
 app.use(express.json());
