@@ -11,28 +11,20 @@ const VideoBackground = ({ movieId, large }) => {
     return <div>No trailer available</div>;
   }
 
-  const videoParams = {
-    autoplay: 1,
-    mute: 1,
-    ...(large
-      ? {}
-      : {
-          loop: 1,
-          controls: 0,
-          modestbranding: 1,
-          disablekb: 1,
-          iv_load_policy: 3,
-        }),
-  };
+  let videoSrc;
 
-  const paramString = new URLSearchParams(videoParams).toString();
-  const videoSrc = `https://www.youtube.com/embed/${trailerMovie.key}?${paramString}`;
+  if (large) {
+    videoSrc = `https://www.youtube.com/embed/${trailerMovie.key}?autoplay=1&mute=1&controls=0`;
+    console.log(videoSrc);
+  } else {
+    videoSrc = `https://www.youtube.com/embed/${trailerMovie.key}?loop=1&controls=0&modestbranding=1&disablekb=1&iv_load_policy=3&autoplay=1&mute=1&playlist=${trailerMovie.key}`;
+  }
 
   return (
     <div
       className={large ? "w-full h-[50vh]" : "relative w-screen aspect-video"}
     >
-      {!large && <div className="absolute top-0 w-full h-16 bg-red z-10"></div>}
+      
       <iframe
         className="w-full h-full aspect-w-16 aspect-h-9"
         src={videoSrc}

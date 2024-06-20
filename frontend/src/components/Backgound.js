@@ -27,7 +27,7 @@ const Background = () => {
   };
 
   return (
-    <div className="h-screen w-screen overflow-x-hidden relative">
+    <div className="new w-screen overflow-x-hidden relative">
       {/* Background Image */}
       <VideoBackground movieId={selectedMovie.id} />
 
