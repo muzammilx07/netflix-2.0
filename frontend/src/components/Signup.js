@@ -10,7 +10,7 @@ const Signup = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate(); 
 
-  const origin = process.env.REACT_APP_BACKEND_URL_TWO;
+  const origin = "https://netflix-2-0-b4ss.onrender.com";
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -20,7 +20,6 @@ const Signup = () => {
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
-    // Validation: Check if any of the fields are empty
     if (!name || !username || !email || !password) {
       setError("Please fill in all fields.");
       return;
@@ -49,8 +48,6 @@ const Signup = () => {
     } catch (error) {
       console.error("Error signing up:", error);
       if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
         console.error("Server response data:", error.response.data);
         console.error("Server response status:", error.response.status);
         setError(`Sign up failed: ${error.response.data.message}`);

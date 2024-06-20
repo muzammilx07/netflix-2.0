@@ -15,7 +15,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const origin = process.env.REACT_APP_BACKEND_URL_TWO;
+  const origin = "https://netflix-2-0-b4ss.onrender.com";
 
   const handleSignIn = async (e) => {
     e.preventDefault();
