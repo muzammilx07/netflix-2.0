@@ -15,7 +15,11 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const origin = "https://netflix-2-0-b4ss.onrender.com";
+  const origin =
+    process.env.NODE_ENV === "production"
+      ? "https://netflix-2-0-b4ss.onrender.com"
+      : "http://localhost:8080";
+
 
   const handleSignIn = async (e) => {
     e.preventDefault();

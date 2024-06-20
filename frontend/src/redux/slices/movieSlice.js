@@ -30,6 +30,7 @@ const movieSlice = createSlice({
     },
     getId: (state, action) => {
       state.selectedMovieId = action.payload;
+      console.log(`"state:"${state.selectedMovieId}`);
     },
     setOpen: (state, action) => {
       state.isOpen = !state.isOpen;

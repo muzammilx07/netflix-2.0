@@ -10,7 +10,11 @@ const Signup = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate(); 
 
-  const origin = "https://netflix-2-0-b4ss.onrender.com";
+ const origin =
+   process.env.NODE_ENV === "production"
+     ? "https://netflix-2-0-b4ss.onrender.com"
+     : "http://localhost:8080";
+
 
   const handleSignUp = async (e) => {
     e.preventDefault();

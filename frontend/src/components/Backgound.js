@@ -7,21 +7,24 @@ import { getId, setDailog } from "../redux/slices/movieSlice";
 
 const Background = () => {
   const movies = useSelector((store) => store.movie?.nowPlayingMovies);
+  const selectedMovieId = useSelector((store) => store.movie.selectedMovieId);
   const dispatch = useDispatch();
 
   if (!movies || movies.length === 0) return null;
 
-  const selectedMovie = movies[0];
+  const selectedMovie =
+    movies.find((movie) => movie.id === selectedMovieId) || movies[0];
   const genres =
     selectedMovie.genres && Array.isArray(selectedMovie.genres)
       ? selectedMovie.genres.map((genre) => genre.name).join(", ")
       : "";
 
-      const handleClick = (e) => {
-        e.stopPropagation();
-        dispatch(getId(selectedMovie.id));
-        dispatch(setDailog(true));
-      };
+  const handleClick = (e) => {
+    e.stopPropagation();
+    dispatch(getId(selectedMovie.id));
+    console.log(selectedMovie.id);
+    dispatch(setDailog(true));
+  };
 
   return (
     <div className="h-screen w-screen overflow-x-hidden relative">
