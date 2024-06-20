@@ -6,12 +6,17 @@ const VideoBackground = ({ movieId, large }) => {
   const trailerMovie = useSelector((store) => store.movie.trailerMovie);
   useMovieById(movieId);
 
+  let videoSrc;
   if (!trailerMovie || !trailerMovie.key) {
     console.log("No trailer available:", trailerMovie);
     return <div>No trailer available</div>;
   }
 
-  const videoSrc = `https://www.youtube.com/embed/${trailerMovie.key}?autoplay=1&mute=1`;
+  if (large) {
+    videoSrc = `https://www.youtube.com/embed/${trailerMovie.key}?autoplay=1&mute=1`;
+  } else {
+    videoSrc = `https://www.youtube.com/embed/${trailerMovie.key}?autoplay=1&mute=1&controls=0`;
+  }
 
   return (
     <div
@@ -19,8 +24,7 @@ const VideoBackground = ({ movieId, large }) => {
     >
       {!large && (
         <>
-          <div className="absolute top-0 w-full h-16 bg-black z-10"></div>
-          <div className="absolute bottom-0 w-full h-16 bg-black z-10"></div>
+          <div className="absolute top-0 w-full h-16 bg-red z-10"></div>
         </>
       )}
       <iframe

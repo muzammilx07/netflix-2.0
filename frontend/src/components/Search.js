@@ -34,11 +34,11 @@ const SearchMovie = () => {
             <input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full outline-none rounded-md text-lg"
+              className="w-full outline-none rounded-md text-lg px-4"
               type="text"
               placeholder="Search Movies..."
             />
-            <button className="bg-red-800 text-white rounded-md px-4 py-2">
+            <button className="bg-red-800 text-white rounded-md px-4 py-2 mx-3 ">
               Search
             </button>
           </div>

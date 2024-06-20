@@ -6,6 +6,7 @@ import "./css/custom.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/slices/userSlice";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const emailRef = useRef(null);
@@ -39,14 +40,17 @@ const Login = () => {
         },
         withCredentials: true,
       });
-      
+
+      // Set token in cookies
+      Cookies.set("token", response.data.token, { expires: 1 }); 
+
       // Update user in local storage
       localStorage.setItem("user", JSON.stringify(response.data.user));
-
+      
       dispatch(setUser(response.data.user));
 
       setError("");
-      alert(JSON.stringify(response.data.message));
+      alert(response.data.message);
 
       navigate("/");
     } catch (error) {
@@ -54,6 +58,7 @@ const Login = () => {
       setError("Invalid credentials. Please try again.");
     }
   };
+
 
   return (
     <div className="relative w-screen h-screen overflow-hidden">
@@ -119,7 +124,7 @@ const Login = () => {
               <p className="m-8 underline">Forget Password ?</p>
               <p className="m-8">
                 New to Netflix?{" "}
-                <Link to="/signin">
+                <Link to="/signup">
                   <span className="font-bold">Sign up now.</span>
                 </Link>
               </p>

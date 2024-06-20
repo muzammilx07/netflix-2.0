@@ -4,10 +4,12 @@ const jwt = require("jsonwebtoken");
 const { createErrorHandler } = require("../middleware/errorHandler.js");
 const catchAsyncErrors = require("../middleware/catchAsync");
 
+
 // Function to generate JWT token
 const generateToken = (id) => {
+  const expiresInSec = 24 * 60 * 60; // 24 hours in seconds
   return jwt.sign({ id }, process.env.JWT_SECRET_KEY, {
-    expiresIn: process.env.JWT_EXPIRES_IN, // Token for 1 day (24 hours)
+    expiresIn: expiresInSec,
   });
 };
 
@@ -79,17 +81,12 @@ const Login = catchAsyncErrors(async (req, res, next) => {
       success: false,
     });
   }
-
-  // Generate JWT token
   const token = generateToken(user._id);
-
-  // Send token in response along with a success message
   return res
     .status(200)
-    .cookie("token", token, {
-      httpOnly: true, 
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict", 
+    .cookie("JWT", token, {
+      httpOnly: true,
+      sameSite: "strict",
     })
     .json({
       message: "Login successful",

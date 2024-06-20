@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Import useNavigate hook
+import { useNavigate, Link} from "react-router-dom"; // Import useNavigate hook
 
 const Signup = () => {
   const nameRef = useRef(null);
@@ -69,7 +69,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-red-700">
       <form
         onSubmit={handleSignUp}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md w-full"
@@ -159,10 +159,18 @@ const Signup = () => {
         <div className="text-center">
           <button
             type="submit"
-            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-2"
           >
             Sign Up
           </button>
+          <Link to="/login">
+            <button
+              type="submit"
+              className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Log In
+            </button>
+          </Link>
         </div>
       </form>
     </div>

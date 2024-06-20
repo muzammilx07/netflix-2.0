@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/pngwing.com.png";
 import { FaSearch } from "react-icons/fa";
-import { MdAccountCircle } from "react-icons/md";
+import Dropdown from './Dropdown';
 import { useSelector, useDispatch } from "react-redux";
 import { setOpen } from "../redux/slices/movieSlice";
 import { ImCross } from "react-icons/im";
@@ -16,12 +16,10 @@ const Navbar = ({ isScrolled }) => {
     dispatch(setOpen());
   };
 
-  console.log("isScrolled:", isScrolled); // Log the prop to check its value
-
   return (
     <div
       className={`fixed top-0 w-full z-50 ${
-        isScrolled ? "bg-black" : "bg-transparent"
+        isScrolled ? "bg-black" : "bg-black"
       }`}
     >
       <nav className="flex items-center justify-between px-4 py-2 md:px-16 md:py-4 overflow-x-hidden">
@@ -32,22 +30,22 @@ const Navbar = ({ isScrolled }) => {
           </div>
           <ul className="flex ml-20 space-x-8">
             <li>
-              <Link to="/browse" className="text-white hover:text-gray-300">
+              <Link to="/" className="text-white hover:text-gray-300">
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/tv" className="text-white hover:text-gray-300">
+              <Link to="" className="text-white hover:text-gray-300">
                 TV Shows
               </Link>
             </li>
             <li>
-              <Link to="/movies" className="text-white hover:text-gray-300">
+              <Link to="" className="text-white hover:text-gray-300">
                 Movies
               </Link>
             </li>
             <li>
-              <Link to="/mylist" className="text-white hover:text-gray-300">
+              <Link to="" className="text-white hover:text-gray-300">
                 My List
               </Link>
             </li>
@@ -62,9 +60,7 @@ const Navbar = ({ isScrolled }) => {
           >
             {toggle ? <ImCross /> : <FaSearch className="text-white" />}
           </button>
-          <button className="text-white focus:outline-none">
-            <MdAccountCircle className="text-white text-3xl" />
-          </button>
+         <Dropdown/>
         </div>
       </nav>
     </div>

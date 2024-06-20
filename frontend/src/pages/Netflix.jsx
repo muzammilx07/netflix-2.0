@@ -1,6 +1,5 @@
-// src/pages/Netflix.jsx
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Background from "../components/Backgound";
@@ -8,6 +7,7 @@ import Search from "../components/Search";
 import MovieContainer from "../components/MovieContainer";
 import { setUser } from "../redux/slices/userSlice";
 import { ClipLoader } from "react-spinners";
+import useAuth from "../hooks/useAuth";
 import {
   useNowPlayingMovies,
   usePopularMovies,
@@ -19,16 +19,12 @@ const Netflix = () => {
   const [scrolled, setScrolled] = useState(false);
   const [userLoaded, setUserLoaded] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
+  const { isAuthenticated, loggedInUser } = useAuth();
   const toggle = useSelector((state) => state.movie.isOpen);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -39,23 +35,15 @@ const Netflix = () => {
   }, []);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const loggedInUser = localStorage.getItem("user");
-
-        if (loggedInUser) {
-          const parsedUser = JSON.parse(loggedInUser);
-          dispatch(setUser(parsedUser));
-        }
-        setUserLoaded(true);
-      } catch (error) {
-        console.error("Error fetching user from localStorage:", error);
-        setUserLoaded(true);
+    const userCheck = async () => {
+      if (loggedInUser) {
+        dispatch(setUser(loggedInUser));
       }
+      setUserLoaded(true);
     };
 
-    fetchUser();
-  }, [dispatch]);
+    userCheck();
+  }, [dispatch, loggedInUser]);
 
   const nowPlayingLoading = useNowPlayingMovies();
   const popularLoading = usePopularMovies();
@@ -76,7 +64,7 @@ const Netflix = () => {
     );
   }
 
-  if (!user && userLoaded) {
+  if (!isAuthenticated) {
     return <Navigate to="/login" />;
   }
 
