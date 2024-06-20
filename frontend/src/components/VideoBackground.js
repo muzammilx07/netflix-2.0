@@ -17,6 +17,12 @@ const VideoBackground = ({ movieId, large }) => {
     <div
       className={large ? "w-full h-[50vh]" : "relative w-screen aspect-video"}
     >
+      {!large && (
+        <>
+          <div className="absolute top-0 w-full h-16 bg-black z-10"></div>
+          <div className="absolute bottom-0 w-full h-16 bg-black z-10"></div>
+        </>
+      )}
       <iframe
         className="w-full h-full aspect-w-16 aspect-h-9"
         src={videoSrc}
