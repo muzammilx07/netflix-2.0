@@ -8,6 +8,8 @@ import MovieContainer from "../components/MovieContainer";
 import { setUser } from "../redux/slices/userSlice";
 import { ClipLoader } from "react-spinners";
 import useAuth from "../hooks/useAuth";
+import Footer from '../components/Footer'
+import ModalUnstyled from "../components/AccountModel";
 import {
   useNowPlayingMovies,
   usePopularMovies,
@@ -70,6 +72,7 @@ const Netflix = () => {
 
   return (
     <div className="overflow-x-hidden">
+      <ModalUnstyled />
       <Navbar isScrolled={scrolled} />
       {toggle ? (
         <Search />
@@ -79,6 +82,7 @@ const Netflix = () => {
           <MovieContainer />
         </>
       )}
+      <Footer />
     </div>
   );
 };

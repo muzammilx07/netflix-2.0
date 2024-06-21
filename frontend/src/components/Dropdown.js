@@ -1,3 +1,4 @@
+import { openModal } from "../redux/slices/modalSlice";
 import * as React from "react";
 import { MdAccountCircle } from "react-icons/md";
 import Avatar from "@mui/material/Avatar";
@@ -9,27 +10,31 @@ import { TbLogout } from "react-icons/tb";
 import { IoMdSettings } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { setUser } from "../redux/slices/userSlice";
 import useLogout from "../hooks/useLogout";
 
 const Dropdown = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user); // Adjust to your Redux slice
-  const userName = user ? user.username : ""; // Ensure safe access to username
+  const user = useSelector((state) => state.user.user);
+  const userName = user ? user.username : "";
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleAccountClick = () => {
+    dispatch(openModal());
+    handleClose();
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  const logout = useLogout(); // Custom hook to handle logout
+  const logout = useLogout();
   const handleLogout = () => {
-    logout(); 
+    logout();
   };
 
   return (
@@ -87,9 +92,9 @@ const Dropdown = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem onClick={handleClose}>
-          <Avatar /> {userName}
+          <p className="text-red-700 text-xl">@{userName}</p>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleAccountClick}>
           <Avatar /> My account
         </MenuItem>
         <Divider sx={{ bgcolor: "gray" }} />
