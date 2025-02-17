@@ -41,7 +41,7 @@ const Netflix = () => {
       if (loggedInUser) {
         dispatch(setUser(loggedInUser));
       }
-      setUserLoaded(true);
+      setUserLoaded(false);
     };
 
     userCheck();
