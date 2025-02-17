@@ -41,7 +41,7 @@ const Netflix = () => {
       if (loggedInUser) {
         dispatch(setUser(loggedInUser));
       }
-      setUserLoaded(false);
+      setUserLoaded(true);
     };
 
     userCheck();
@@ -66,7 +66,7 @@ const Netflix = () => {
     );
   }
 
-  if (!isAuthenticated) {
+  if (isAuthenticated) {
     return <Navigate to="/login" />;
   }
 
