@@ -66,9 +66,9 @@ const Netflix = () => {
     );
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" />;
-  }
+  //if (!isAuthenticated) {
+    //return <Navigate to="/login" />;
+ // }
 
   return (
     <div className="overflow-x-hidden">
