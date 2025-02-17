@@ -19,7 +19,7 @@ import {
 
 const Netflix = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [userLoaded, setUserLoaded] = useState(false);
+  const [userLoaded, setUserLoaded] = useState(true);//changes here for temp
   const dispatch = useDispatch();
   const { isAuthenticated, loggedInUser } = useAuth();
   const toggle = useSelector((state) => state.movie.isOpen);
@@ -66,7 +66,7 @@ const Netflix = () => {
     );
   }
 
-  if (isAuthenticated) {
+  if (!isAuthenticated) {
     return <Navigate to="/login" />;
   }
 
